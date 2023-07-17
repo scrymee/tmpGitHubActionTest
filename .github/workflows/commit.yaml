@@ -16,7 +16,8 @@ jobs:
         run: |
           pwd
           ls -la
-          echo 'hello world' > hello.md
+          echo "${{github.event.issue.title}}" > hello.md
+          echo "${{github.event.issue.body}}" >> hello.md
           ls -la
       - name: push
         env: 
