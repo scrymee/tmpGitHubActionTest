@@ -39,15 +39,19 @@ jobs:
         run: |
           pwd
           ls -la
-      - name: push
-        env: 
-          EMAIL: ${{secrets.EMAIL}}
-        run: |
-           date > genereate.txt
-           git config user.name scrymee
-           git config user.email "$EMAIL"
-           git add .
-           git commit -m 'test'
-            git push
-        
+ #     - name: push
+ #       env: 
+ #         EMAIL: ${{secrets.EMAIL}}
+ #       run: |
+ #          date > genereate.txt
+ #          git config user.name scrymee
+ #          git config user.email "$EMAIL"
+ #          git add .
+ #          git commit -m 'test'
+ #           git push
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./content
         
