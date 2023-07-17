@@ -13,7 +13,8 @@ jobs:
           pwd
           ls -la
           echo 'hello world' > hello.md
-          echo "$github.event.label.name"
+          echo "${{github.event.label.name}}"
+          echo "${{github.event}}"
           ls -la
       - name: push
         env: 
