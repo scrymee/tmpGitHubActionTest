@@ -34,7 +34,7 @@ jobs:
            ---
 
            $POST_BODY
-           EOF                
+               
       - name: テスト
         run: |
           pwd
