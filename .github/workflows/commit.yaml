@@ -2,10 +2,10 @@ on:
   push:
   workflow_dispatch:
 jobs:
-  build:
+  update_repos:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: 読み込み
         uses: actions/checkout@v3
       - name: checkDirectry
         run: |
