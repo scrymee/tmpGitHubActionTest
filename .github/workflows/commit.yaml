@@ -6,18 +6,38 @@ jobs:
   updateRepos:
     runs-on: ubuntu-latest
     steps:
-      - name: checkOutMyrepository
+      - name: リポジトリの環境を仮想環境に作成（CheckOut）
         uses: actions/checkout@v3
       - name: DEBUG
         env:
-          STRATEGY_CONTEXT: ${{ toJson(github.event) }}
-        run: echo "$STRATEGY_CONTEXT"
+          DEBUG: ${{ toJson(github.event) }}
+        run: echo "$DEBUG"
+      - name: Hugoの記法に合わせてファイルを生成（Generate Post）
+        env:
+          POST_TITLE: ${{ github.event.issue.title }}
+          POST_BODY: ${{ github.event.issue.body }}
+          POST_ID: ${{ github.event.issue.id }}
+          POST_CATEGORY: ${{ github.event.issue.labels[0].name }}
+        run: |
+           YEAR=`date "+%Y"`
+           MONTH=`date "+%m"`
+           mkdir -p content/posts/$YEAR/$MONTH
+           cd content/posts/$YEAR/$MONTH
+           cat > $POST_ID.md << EOF
+           ---
+           draft: false
+           title: $POST_TITLE
+           date: ${{ github.event.issue.updated_at }}
+           type: post
+           slug: $POST_ID
+           category: ["${POST_CATEGORY}"]
+           ---
+
+           $POST_BODY
+           EOF                
       - name: テスト
         run: |
           pwd
-          ls -la
-          echo "${{github.event.issue.title}}" > hello.md
-          echo "${{github.event.issue.body}}" >> hello.md
           ls -la
       - name: push
         env: 
