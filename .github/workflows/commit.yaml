@@ -7,6 +7,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: checkDirectry
+        run: |
+          pwd
+          ls -la
+          echo 'hello world' > hello.md
+          ls -la
       - name: push
         env: 
           EMAIL: ${{secrets.EMAIL}}
