@@ -5,11 +5,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        env: 
+          EMAIL: ${{secrets.EMAIL}}
       - uses: actions/checkout@v3
       - run: |
           date > genereate.txt
           git config user.name scrymee
-          git config user.email syoumee@gmail.com
+          git config user.email "$EMAIL"
           git add .
           git commit -m 'test'
           git push
