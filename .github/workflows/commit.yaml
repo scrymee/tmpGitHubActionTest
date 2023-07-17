@@ -2,12 +2,12 @@ on:
   push:
   workflow_dispatch:
 jobs:
-  update_repos:
+  updateRepos:
     runs-on: ubuntu-latest
     steps:
-      - name: 読み込み
+      - name: checkOutMyrepository
         uses: actions/checkout@v3
-      - name: checkDirectry
+      - name: テスト
         run: |
           pwd
           ls -la
