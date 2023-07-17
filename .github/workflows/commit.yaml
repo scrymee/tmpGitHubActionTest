@@ -1,6 +1,6 @@
 on:
   issues:
-    types: [labeled]
+    types: [labeled, unlabeled]
   workflow_dispatch:
 jobs:
   updateRepos:
@@ -12,6 +12,12 @@ jobs:
         env:
           DEBUG: ${{ toJson(github.event) }}
         run: echo "$DEBUG"
+      - name: 条件分岐テスト(unlabel)
+        if: ${{ github.event.action == 'unlabeled'}}
+        run: echo 'unlabeled'
+      - name: 条件分岐テスト(label)
+        if: ${{ github.event.action == 'labeled'}}
+        run: echo 'labeled'
       - name: Hugoの記法に合わせてファイルを生成（Generate Post）
         env:
           POST_TITLE: ${{ github.event.issue.title }}
