@@ -23,7 +23,7 @@ jobs:
            MONTH=`date "+%m"`
            mkdir -p content/posts/$YEAR/$MONTH
            cd content/posts/$YEAR/$MONTH
-           cat > $POST_ID.md << EOF
+           cat > $POST_ID.md <<EOF
            ---
            draft: false
            title: $POST_TITLE
