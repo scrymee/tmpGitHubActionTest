@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: checkOutMyrepository
         uses: actions/checkout@v3
-      - name: debug
+      - name: DEBUG
         env:
           STRATEGY_CONTEXT: ${{ toJson(github.event) }}
         run: echo "$STRATEGY_CONTEXT"
@@ -17,8 +17,6 @@ jobs:
           pwd
           ls -la
           echo 'hello world' > hello.md
-          echo "${{github.event.label.name}}"
-          echo '${{ toJSON(github.event) }}'
           ls -la
       - name: push
         env: 
