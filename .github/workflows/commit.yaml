@@ -20,12 +20,15 @@ jobs:
         env: 
           POST_ID: ${{ github.event.issue.id }}
         run: |
-          ls -la
+          find . -name $POST_ID.md 
           find . -name $POST_ID.md | xargs rm
+          find . -name $POST_ID.md 
+          echo 'end'
       - name: 条件分岐テスト(label)
         if: ${{ github.event.action == 'labeled'}}
         run: echo 'labeled'
       - name: Hugoの記法に合わせてファイルを生成（Generate Post）
+        if: ${{ github.event.action == 'labeled'}}
         env:
           POST_TITLE: ${{ github.event.issue.title }}
           POST_BODY: ${{ github.event.issue.body }}
