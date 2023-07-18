@@ -17,7 +17,11 @@ jobs:
         run: echo 'unlabeled'
       - name: 条件分岐テスト(unlabel and bug)
         if: ${{ github.event.action == 'unlabeled' && github.event.label.name == 'bug'}}
-        run: echo 'unlabeled'
+        env: 
+          POST_ID: ${{ github.event.issue.id }}
+        run: |
+          ls -la
+          find . -name $POST_ID.md | xargs rm
       - name: 条件分岐テスト(label)
         if: ${{ github.event.action == 'labeled'}}
         run: echo 'labeled'
