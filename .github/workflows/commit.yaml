@@ -15,6 +15,9 @@ jobs:
       - name: 条件分岐テスト(unlabel)
         if: ${{ github.event.action == 'unlabeled'}}
         run: echo 'unlabeled'
+      - name: 条件分岐テスト(unlabel and bug)
+        if: ${{ github.event.action == 'unlabeled' && github.event.label.name == 'bug'}}
+        run: echo 'unlabeled'
       - name: 条件分岐テスト(label)
         if: ${{ github.event.action == 'labeled'}}
         run: echo 'labeled'
@@ -38,6 +41,8 @@ jobs:
            slug: $POST_ID
            category: ["${POST_CATEGORY}"]
            ---
+           
+           「$POST_TITLE」に関しての記事です
 
            $POST_BODY
                
