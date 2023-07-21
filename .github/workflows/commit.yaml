@@ -1,6 +1,6 @@
 on:
   issues:
-    types: [labeled, unlabeled]
+    types: [labeled, unlabeled, edited]
   workflow_dispatch:
 jobs:
   updateRepos:
