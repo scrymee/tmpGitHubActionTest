@@ -24,6 +24,9 @@ jobs:
           find . -name $POST_ID.md | xargs rm
           find . -name $POST_ID.md 
           echo 'end'
+      - name: 条件分岐テスト(編集＋ラベル)
+        if: ${{ github.event.action == 'edited' && github.event.label.name == 'bug'}}
+        run: echo 'labeled'  
       - name: 条件分岐テスト(label)
         if: ${{ github.event.action == 'labeled'}}
         run: echo 'labeled'
