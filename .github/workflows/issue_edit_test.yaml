@@ -12,13 +12,8 @@ jobs:
         EVENT: ${{ toJson(github.event) }}
       run: |
         echo "$EVENT"
-        if echo "${{ github.event.issue.labels }}" | grep -q 'name: publish'; then
+        if echo "${{ github.event.issue.labels }}" | grep -q 'publish'; then
           echo "Issue has 'publish' label. Do something!"
         else
           echo "Issue does not have 'publish' label. Skipping."
         fi
-
-    - name: Check issue label
-      run: |
-        # ここに実行したいコマンドを記述します
-        echo "Issue has 'publish' label. Do something!"
