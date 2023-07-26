@@ -1,0 +1,14 @@
+name: Issue Label Trigger
+on:
+  issues:
+    types: [edited]
+
+jobs:
+  check_issue_label:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check issue label
+      if: github.event.issue.labels | map(.name) | contains(['publish'])
+      run: |
+        # ここに実行したいコマンドを記述します
+        # 例：echo "Issue has 'publish' label. Do something!"
