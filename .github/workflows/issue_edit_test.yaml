@@ -8,7 +8,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check issue label
-      if: github.event.issue.labels | map(.name) | contains(['publish'])
+      env:
+        EVENT: ${{ toJson(github.event) }}
+      run: |
+        echo "$EVENT"
+        if echo "${{ github.event.issue.labels }}" | grep -q 'name: publish'; then
+          echo "Issue has 'publish' label. Do something!"
+        else
+          echo "Issue does not have 'publish' label. Skipping."
+        fi
+
+    - name: Check issue label
       run: |
         # ここに実行したいコマンドを記述します
-        # 例：echo "Issue has 'publish' label. Do something!"
+        echo "Issue has 'publish' label. Do something!"
