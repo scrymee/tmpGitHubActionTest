@@ -24,6 +24,7 @@ jobs:
         echo 'loop'
         echo '--------------------------------------'
         NAMES=${NAMES#[}
+        NAMES=${NAMES%]}
         NAMES_ARRAY=(NAMES)
         for v in ${NAMES[@]}
           do
@@ -31,7 +32,7 @@ jobs:
           echo 'loop count'
         done
         echo "====================================="        
-        if echo "${{ github.event.issue.labels }}" | grep -q 'publish'; then
+        if echo "${NAMES}" | grep -q 'publish'; then
           echo "Issue has 'publish' label. Do something!"
         else
           echo "Issue does not have 'publish' label. Skipping."
