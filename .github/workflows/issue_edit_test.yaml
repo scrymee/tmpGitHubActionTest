@@ -14,6 +14,15 @@ jobs:
           POST_ID: ${{ github.event.issue.id }}
           POST_CATEGORY: ${{ toJSon(github.event.issue.labels.*.name) }}
       run: |
+          POST_CATEGORY=${POST_CATEGORY#[}
+          POST_CATEGORY=${POST_CATEGORY%]}
+          POST_CATEGORY_ARRAY=(POST_CATEGORY)
+          TAGS=''
+          for v in ${POST_CATEGORY_ARRAY[@]}
+          do
+            TAGS=$TAGS","$v
+            echo $TAGS
+          done
            YEAR=`date "+%Y"`
            MONTH=`date "+%m"`
            mkdir -p content/posts/$YEAR/$MONTH
@@ -26,7 +35,7 @@ jobs:
            title: $POST_TITLE
            date: ${{ github.event.issue.updated_at }}
            slug: $POST_ID
-           category: ["${POST_CATEGORY}"]
+           category: ["${TAGS}"]
            thumbnailImagePosition: "top"
            thumbnailImage: //d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg
            coverImage: //d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city.jpg
