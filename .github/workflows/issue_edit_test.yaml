@@ -15,8 +15,20 @@ jobs:
         echo '--------------------------------------'
         echo  "${{ github.event.issue.labels }}"
         echo '--------------------------------------'
+        echo 'Lavel'
+        echo '--------------------------------------'
         LABELS="${{ github.event.issue.labels }}"
-        echo "${LABELS[@]}"
+        echo "${LABELS}"
+        echo '--------------------------------------'
+        echo 'loop'
+        echo '--------------------------------------'
+        
+        i=0
+          for v in "${LABELS[@]}"  
+          do
+          echo "$i => $v"
+          let i++
+        done
         echo "====================================="        
         if echo "${{ github.event.issue.labels }}" | grep -q 'publish'; then
           echo "Issue has 'publish' label. Do something!"
