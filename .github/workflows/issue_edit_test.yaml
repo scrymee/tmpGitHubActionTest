@@ -40,6 +40,8 @@ jobs:
            $POST_BODY
 
     - name: checkPostData
+      env: 
+        POST_ID: ${{ github.event.issue.id }}
       run: |
            cat ${POST_ID}.md
     - name: Check issue label
