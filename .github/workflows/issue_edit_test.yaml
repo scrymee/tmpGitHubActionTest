@@ -39,7 +39,8 @@ jobs:
 
            $POST_BODY
 
-           echo '-------------'
+    - name: checkPostData
+      run: |
            cat ${POST_ID}.md
     - name: Check issue label
       if: ${{ github.event.action == 'labeled'}}
