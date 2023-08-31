@@ -11,10 +11,11 @@ jobs:
       env:
         EVENT: ${{ toJson(github.event) }}
         LABELS: ${{ toJson(github.event.issue.labels) }}
+        NAMES: ${{ github.event.issue.labels.*.name }}
       run: |
         echo "$EVENT"
         echo '--------------------------------------'
-        echo  "${{ github.event.issue.labels.*.name }}"
+        echo  "$NAMES"
         echo '--------------------------------------'
         echo 'Lavel'
         echo '--------------------------------------'
