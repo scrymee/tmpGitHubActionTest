@@ -22,12 +22,9 @@ jobs:
         echo '--------------------------------------'
         echo 'loop'
         echo '--------------------------------------'
-        
-        i=0
-          for v in "${LABELS}"  
+        for v in "${LABELS[@]}"  
           do
-          echo "$i => $v"
-          let i++
+          echo "$v"
         done
         echo "====================================="        
         if echo "${{ github.event.issue.labels }}" | grep -q 'publish'; then
