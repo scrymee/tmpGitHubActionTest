@@ -23,7 +23,7 @@ jobs:
         echo '--------------------------------------'
         echo 'loop'
         echo '--------------------------------------'
-        for v in "${LABELS[@]}"  
+        for v in ${NAMES[@]}  
           do
           echo "$v"
         done
