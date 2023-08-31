@@ -23,9 +23,10 @@ jobs:
         echo '--------------------------------------'
         echo 'loop'
         echo '--------------------------------------'
-        for v in ${NAMES[@]}  
+        for v in $NAMES  
           do
           echo "$v"
+          echo 'loop count'
         done
         echo "====================================="        
         if echo "${{ github.event.issue.labels }}" | grep -q 'publish'; then
