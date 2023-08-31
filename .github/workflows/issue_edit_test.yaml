@@ -23,7 +23,9 @@ jobs:
         echo '--------------------------------------'
         echo 'loop'
         echo '--------------------------------------'
-        for v in $NAMES  
+        NAMES=${NAMES#[}
+        NAMES_ARRAY=(NAMES)
+        for v in $NAMES[@]
           do
           echo "$v"
           echo 'loop count'
