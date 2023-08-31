@@ -7,7 +7,41 @@ jobs:
   check_issue_label:
     runs-on: ubuntu-latest
     steps:
+    - name: 作成テスト
+      env:
+          POST_TITLE: ${{ github.event.issue.title }}
+          POST_BODY: ${{ github.event.issue.body }}
+          POST_ID: ${{ github.event.issue.id }}
+          POST_CATEGORY: ${{ github.event.issue.labels.*.name }}
+      run: |
+           YEAR=`date "+%Y"`
+           MONTH=`date "+%m"`
+           mkdir -p content/posts/$YEAR/$MONTH
+           touch content/posts/$YEAR/_index.md
+           touch content/posts/$YEAR/$MONTH/_index.md
+           cd content/posts/$YEAR/$MONTH
+           cat > $POST_ID.md <<EOF
+           ---
+           draft: false
+           title: $POST_TITLE
+           date: ${{ github.event.issue.updated_at }}
+           slug: $POST_ID
+           category: ["${POST_CATEGORY}"]
+           thumbnailImagePosition: "top"
+           thumbnailImage: //d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg
+           coverImage: //d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city.jpg
+           metaAlignment: center
+           ---
+           「$POST_TITLE」に関しての考えをまとめました。
+           <!--more-->
+           
+           {{< toc >}}
+
+           $POST_BODY
+
+           echo '-------------'
     - name: Check issue label
+      if: ${{ github.event.action == 'labeled'}}
       env:
         EVENT: ${{ toJson(github.event) }}
         LABELS: ${{ toJson(github.event.issue.labels) }}
