@@ -38,6 +38,7 @@ jobs:
            {{< toc >}}
 
            $POST_BODY
+           EOF
     - name: checkPostData
       env: 
         POST_ID: ${{ github.event.issue.id }}
