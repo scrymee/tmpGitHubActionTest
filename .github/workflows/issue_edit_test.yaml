@@ -15,7 +15,7 @@ jobs:
         echo '--------------------------------------'
         echo  "${{ github.event.issue.labels }}"
         echo '--------------------------------------'
-        echo  "${{ github.event.issue.labels }}" | grep 'publish'
+        echo  "${{ github.event.issue.labels[@] }}"
         echo "====================================="        
         if echo "${{ github.event.issue.labels }}" | grep -q 'publish'; then
           echo "Issue has 'publish' label. Do something!"
