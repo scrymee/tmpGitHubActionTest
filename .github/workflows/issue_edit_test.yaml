@@ -32,3 +32,8 @@ jobs:
         else
           echo "Issue does not have 'publish' label. Skipping."
         fi
+    - name: chek2
+      if: contains(github.event.issue.labels.*.name, 'publish')
+      run: |
+        echo 'labelCheck clear'
+
