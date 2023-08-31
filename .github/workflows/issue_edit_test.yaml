@@ -10,6 +10,7 @@ jobs:
     - name: Check issue label
       env:
         EVENT: ${{ toJson(github.event) }}
+        LABELS: ${{ toJson(github.event.issu.labels) }}
       run: |
         echo "$EVENT"
         echo '--------------------------------------'
@@ -17,14 +18,13 @@ jobs:
         echo '--------------------------------------'
         echo 'Lavel'
         echo '--------------------------------------'
-        LABELS="${{ github.event.issue.labels }}"
         echo "${LABELS}"
         echo '--------------------------------------'
         echo 'loop'
         echo '--------------------------------------'
         
         i=0
-          for v in "${LABELS[@]}"  
+          for v in "${LABELS}"  
           do
           echo "$i => $v"
           let i++
