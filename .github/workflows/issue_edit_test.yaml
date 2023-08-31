@@ -11,7 +11,7 @@ jobs:
       env:
         EVENT: ${{ toJson(github.event) }}
         LABELS: ${{ toJson(github.event.issue.labels) }}
-        NAMES: ${{ github.event.issue.labels.*.name }}
+        NAMES: ${{ toJson(github.event.issue.labels.*.name) }}
       run: |
         echo "$EVENT"
         echo '--------------------------------------'
