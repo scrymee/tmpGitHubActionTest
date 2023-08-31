@@ -10,7 +10,7 @@ jobs:
     - name: Check issue label
       env:
         EVENT: ${{ toJson(github.event) }}
-        LABELS: ${{ toJson(github.event.issu.labels) }}
+        LABELS: ${{ toJson(github.event.issue.labels) }}
       run: |
         echo "$EVENT"
         echo '--------------------------------------'
